@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th = "http://www.thymeleaf.org"
+      xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/base.html"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div layout:fragment="content">
+    <header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner" style="background-image: url(images/img_bg_2.jpg)">
+        <div class="overlay"></div>
+        <div class="gtco-container">
+            <div class="row">
+                <div class="col-md-12 col-md-offset-0 text-left">
+
+
+                    <div class="row row-mt-15em">
+                        <div class="col-md-7 mt-text animate-box" data-animate-effect="fadeInUp">
+                            <h1>Планируете поездку в любую точку Казахстана?</h1>
+                        </div>
+                        <div class="col-md-4 col-md-push-1 animate-box" data-animate-effect="fadeInRight">
+                            <div class="form-wrap">
+                                <div class="tab">
+
+                                    <div class="tab-content">
+                                        <div class="tab-content-inner active" data-content="signup">
+                                            <h3>Забронируйте поездку</h3>
+                                            <form th:action="@{'/tours/search'}" method="get">
+                                                <div class="row form-group">
+                                                    <div class="col-md-12">
+                                                        <label for="destination">Направление</label>
+                                                        <select name="destination" id="destination" class="form-control">
+                                                            <option th:each="destination : ${destinations}" th:value="${destination}" th:text="${destination}"></option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row form-group">
+                                                    <div class="col-md-12">
+                                                        <label for="date-start">Date Travel</label>
+                                                        <input name="date-start" type="text" id="date-start" class="form-control">
+                                                    </div>
+                                                </div>
+
+                                                <div class="row form-group">
+                                                    <div class="col-md-12">
+                                                        <input type="submit" class="btn btn-primary btn-block" value="Найти">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="gtco-section">
+        <div class="gtco-container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center gtco-heading">
+                    <h2>Самое популярное туры</h2>
+                    <p>Погрузитесь в мир удивительных контрастов с нашим путешествием по Казахстану! От бескрайних степей и пустынь до великолепных горных хребтов и древних городов — каждый день этого тура наполнен удивительными открытиями.</p>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-lg-4 col-md-4 col-sm-6" th:each="tour : ${tours}">
+                    <a th:href="@{'/tours/' + ${tour.id}}" class="fh5co-card-item">
+                        <figure>
+                            <div class="overlay"><i class="ti-plus"></i></div>
+                            <img th:src="${tour.loadImage()}" alt="Image" class="img-responsive">
+                        </figure>
+                        <div class="fh5co-text">
+                            <h2 th:text="${tour.getDestination()}"></h2>
+                            <p th:text="${tour.getShortDescription()}"></p>
+                            <p><span class="btn btn-primary">Запланировать поездку</span></p>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="gtco-features">
+        <div class="gtco-container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center gtco-heading animate-box">
+                    <h2>Наши услуги</h2>
+                    <p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <div class="feature-center animate-box" data-animate-effect="fadeIn">
+						<span class="icon">
+							<i>1</i>
+						</span>
+                        <h3>Билеты на самолет</h3>
+                        <p>В нашем туристическом агентстве вы можете забронировать авиабилеты в любую точку мира. Мы также обеспечиваем онлайн-бронирование билетов через наш сайт всего за пару шагов.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="feature-center animate-box" data-animate-effect="fadeIn">
+						<span class="icon">
+							<i>2</i>
+						</span>
+                        <h3>Путешествия и круизы</h3>
+                        <p>Помимо регулярных туров и экскурсий, мы также предлагаем разнообразные круизы и морские путешествия для разных клиентов, ищущих потрясающие впечатления.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="feature-center animate-box" data-animate-effect="fadeIn">
+						<span class="icon">
+							<i>3</i>
+						</span>
+                        <h3>Бронирование отелей</h3>
+                        <p>Мы предлагаем широкий выбор отелей: от 5-звездочных до небольших отелей, расположенных по всему миру, чтобы вы могли забронировать понравившийся отель.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="gtco-cover gtco-cover-sm" style="background-image: url(images/img_bg_1.jpg)"  data-stellar-background-ratio="0.5">
+        <div class="overlay"></div>
+        <div class="gtco-container text-center">
+            <div class="display-t">
+                <div class="display-tc">
+                    <h1>У нас качественные услуги, которые вам обязательно понравятся!</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="gtco-counter" class="gtco-section">
+        <div class="gtco-container">
+
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center gtco-heading animate-box">
+                    <h2>Наш успех</h2>
+                    <p>Мы стремимся к идеальному обслуживанию, предлагая высококачественные услуги и создавая неповторимые впечатления для каждого путешественника.</p>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-3 col-sm-6 animate-box" data-animate-effect="fadeInUp">
+                    <div class="feature-center">
+                        <span class="counter js-counter" data-from="0" data-to="196" data-speed="5000" data-refresh-interval="50">1</span>
+                        <span class="counter-label">Направлении</span>
+
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 animate-box" data-animate-effect="fadeInUp">
+                    <div class="feature-center">
+                        <span class="counter js-counter" data-from="0" data-to="97" data-speed="5000" data-refresh-interval="50">1</span>
+                        <span class="counter-label">Отели</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 animate-box" data-animate-effect="fadeInUp">
+                    <div class="feature-center">
+                        <span class="counter js-counter" data-from="0" data-to="12402" data-speed="5000" data-refresh-interval="50">1</span>
+                        <span class="counter-label">Путешественники</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 animate-box" data-animate-effect="fadeInUp">
+                    <div class="feature-center">
+                        <span class="counter js-counter" data-from="0" data-to="12202" data-speed="5000" data-refresh-interval="50">1</span>
+                        <span class="counter-label">Счастливые клиенты</span>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th = "http://www.thymeleaf.org"
+      xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/base.html"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div layout:fragment="content">
+    <header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="background-image: url(images/img_2.jpg)">
+        <div class="overlay"></div>
+        <div class="gtco-container">
+            <div class="row">
+                <div class="col-md-12 col-md-offset-0 text-center">
+                    <div class="row row-mt-15em">
+
+                        <div class="col-md-12 mt-text animate-box" data-animate-effect="fadeInUp">
+                            <h1>Планы для всех</h1>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="gtco-section border-bottom">
+        <div class="gtco-container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center gtco-heading">
+                    <h2>Выберите лучший план для вас</h2>
+                    <p>Выберите лучший план для вас и присоединитесь к более чем 1 миллиону пользователей, которые уже оценили нашу надежность и качество услуг</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="price-box">
+                        <h2 class="pricing-plan">Стандартный план</h2>
+                        <div class="price"><sup class="currency">$</sup>7<small>/м.</small></div>
+                        <p>Включает базовые услуги</p>
+                        <hr>
+                        <ul class="pricing-info">
+                            <li>трансферы</li>
+                            <li>размещение</li>
+                            <li>экскурсии</li>
+                            <li>комфортное проживание</li>
+                        </ul>
+                        <a href="#" class="btn btn-default btn-sm">Начать</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="price-box">
+                        <h2 class="pricing-plan">Премиум план</h2>
+                        <div class="price"><sup class="currency">$</sup>19<small>/м.</small></div>
+                        <p>Дополнительные возможности</p>
+                        <hr>
+                        <ul class="pricing-info">
+                            <li>персональный гид</li>
+                            <li>VIP-трансферы</li>
+                            <li>Лучшие отели</li>
+                            <li>Эксклюзивные маршруты</li>
+                        </ul>
+                        <a href="#" class="btn btn-default btn-sm">Начать</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="price-box popular">
+                        <div class="popular-text">Популярный</div>
+                        <h2 class="pricing-plan">Эксклюзивный план</h2>
+                        <div class="price"><sup class="currency">$</sup>79<small>/м.</small></div>
+                        <p>Полный спектр VIP-услуг</p>
+                        <hr>
+                        <ul class="pricing-info">
+                            <li>роскошные резиденции</li>
+                            <li>приватные вертолетные экскурсии</li>
+                            <li>Персональный ассистент</li>
+                            <li>создание уникальных маршрутов</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary btn-sm">Начать</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="gtco-section">
+        <div class="gtco-container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center gtco-heading animate-box">
+                    <h2>Часто задаваемые вопросы</h2>
+                    <p>Если у вас остались вопросы, не стесняйтесь обращаться к нам — мы всегда готовы помочь!</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <ul class="fh5co-faq-list">
+                        <li class="animate-box">
+                            <h2>Что такое Kazakh Toursim Manage?</h2>
+                            <p>
+                                "Kazakh Tourism Manage - это ваш проводник в удивительный мир Казахстана! Мы специализируемся на создании незабываемых путешествий и открываем для вас самые яркие уголки этой прекрасной страны. Наша команда профессионалов с богатым опытом обеспечивает полный спектр услуг: от организации трансферов и размещения до увлекательных экскурсий и уникальных культурных мероприятий.
+                            </p>
+                        </li>
+                        <li class="animate-box">
+                            <h2>Какие языки доступны?</h2>
+                            <p>
+                                Мы гордимся тем, что предлагаем широкий выбор языков для вашего удобства. В настоящее время доступны казахский, русский и английский языки, а также мы работаем над добавлением новых языков, чтобы ещё лучше соответствовать вашим потребностям.
+                            </p>
+                        </li>
+                        <li class="animate-box">
+                            <h2>У меня техническая проблема, кому мне написать?</h2>
+                            <p>
+                                Если у вас возникла техническая проблема, лучше всего обратиться к службе поддержки или технической поддержке вашей компании или услуги.
+                                Наш e-mail адрес: info@tourmanage.kz
+                            </p>
+                        </li>
+                        <li class="animate-box">
+                            <h2>Какие есть услуги?</h2>
+                            <p>
+                                Мы предлагаем широкий спектр услуг, начиная от организации увлекательных туров и экскурсий по Казахстану до бронирования комфортного размещения в различных отелях и гостиницах. Мы также помогаем с организацией транспорта — от трансферов и аренды автомобилей до заказа такси и услуги гида-водителя.
+                            </p>
+                        </li>
+                        <li class="animate-box">
+                            <h2>Kazakh Tourism Manage бесплатное??</h2>
+                            <p>
+                                Kazakh Tourism Manage предлагает широкий спектр услуг по организации путешествий по Казахстану. Мы работаем над созданием качественных и уникальных туров, предоставляя клиентам незабываемые впечатления от путешествий.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

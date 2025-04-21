@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th = "http://www.thymeleaf.org"
+      xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/admin.html"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div layout:fragment="content">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="card">
+            <h5 class="card-header">Список всех брон</h5>
+            <div class="table-responsive text-nowrap">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Пользователь</th>
+                        <th>Тур</th>
+                        <th>Время брона</th>
+                        <th>Цена</th>
+                        <th>Статус</th>
+                        <th>Функции</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                    <tr th:each="book, index : ${bookings}">
+                        <td th:text="${index.index + 1}"></td>
+                        <td th:text="${book.getUser().getUsername()}"></td>
+                        <td th:text="${book.getTour().getTitle()}"></td>
+                        <td th:text="${book.getBookingDate()}"></td>
+                        <td th:text="${book.getTotalPrice()}"></td>
+                        <td>
+                            <span>
+                                <span th:if="${book.getStatus() == T(kz.projects.tour_project.enums.BookingStatus).PENDING}" class="badge bg-label-warning me-1" th:text="${book.getStatus()}"></span>
+                                <span th:if="${book.getStatus() == T(kz.projects.tour_project.enums.BookingStatus).COMPLETED}" class="badge bg-label-primary me-1" th:text="${book.getStatus()}"></span>
+                                <span th:if="${book.getStatus() == T(kz.projects.tour_project.enums.BookingStatus).CONFIRMED}" class="badge bg-label-info me-1" th:text="${book.getStatus()}"></span>
+                                <span th:if="${book.getStatus() == T(kz.projects.tour_project.enums.BookingStatus).CANCELLED}" class="badge bg-label-danger me-1" th:text="${book.getStatus()}"></span>
+                            </span>
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" th:href="@{'/admin/bookings/edit/' + ${book.id}}"
+                                    ><i class="bx bx-edit-alt me-1"></i> Редактировать</a
+                                    >
+                                    <form th:action="@{'/admin/bookings/delete/' + ${book.id}}" method="post">
+                                        <button type="submit" class="dropdown-item" role="button">
+                                            <i class="bx bx-trash me-1"></i> Удалить
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="content-backdrop fade"></div>
+</div>

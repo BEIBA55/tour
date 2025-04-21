@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th = "http://www.thymeleaf.org"
+      xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/base.html"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div layout:fragment="content">
+    <header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="background-image: url(images/img_6.jpg)">
+        <div class="overlay"></div>
+        <div class="gtco-container">
+            <div class="row">
+                <div class="col-md-12 col-md-offset-0 text-center">
+                    <div class="row row-mt-15em">
+                        <div class="col-md-12 mt-text animate-box" data-animate-effect="fadeInUp">
+                            <h1 th:text="${tour.getTitle()}"></h1>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="gtco-section">
+        <div class="containera">
+            <div class="tour-details">
+                <div class="tour-image">
+                    <img th:src="${tour.loadImage()}" alt="Tour Image">
+                </div>
+                <div class="tour-info">
+                    <h1 th:text="${tour.getTitle()}"></h1>
+                    <p style="color: #333; font-size: 14px" th:text="${tour.getShortDescription()}"></p>
+                    <h4 style="color: #ccc; font-size: 16px" th:text="${tour.getDestination()}"></h4>
+                    <div class="short-description">
+                    </div>
+                    <div class="full-description">
+                        <h3>Описание:</h3>
+                        <p th:text="${tour.getDescription()}"></p>
+                    </div>
+                    <div class="tour-details-footer">
+                        <div class="seats-left">
+                            <span>Осталось мест:</span> <span th:text="${tour.getAvailableSeats()}"></span>
+                        </div>
+                        <div class="tour-price">
+                            <span>Цена:</span> <span th:text="${'$' + tour.getPrice()}"></span>
+                        </div>
+                    </div>
+                        <form th:action="@{'/bookings/book-tour/' + ${tour.id}}" method="post" class="book-now">
+                            <button sec:authorize="isAuthenticated()"
+                                    th:text="${userHasBooking ? 'Забронировано' : 'Забронировать'}"
+                                    th:if="${tour.availableSeats > 0}"
+                                    th:unless="${userHasBooking}"></button>
+                            <a th:href="@{'/sign-in'}" sec:authorize="isAnonymous()" style="background-color: #007bff; color: #fff">Авторизация</a>
+                            <span th:if="${tour.availableSeats == 0 || userHasBooking}">Нет доступных мест или вы уже забронировали.</span>
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

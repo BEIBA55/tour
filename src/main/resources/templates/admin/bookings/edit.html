@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th = "http://www.thymeleaf.org"
+      xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/admin.html"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div layout:fragment="content">
+    <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="row">
+        <div class="col-xl">
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Редактировать брон</h5>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{'/admin/bookings/update'}" method="PUT">
+                        <div class="mb-3">
+                            <label class="form-label" for="basic-default-fullname">Имя пользователя</label>
+                            <input type="text" class="form-control" id="basic-default-fullname" disabled th:value="${booking.getUser().getUsername()}" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="basic-default-company">Название тура</label>
+                            <input type="text" class="form-control" id="basic-default-company" disabled th:value="${booking.getTour().getTitle()}" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="basic-default-company">Общая сумма</label>
+                            <input type="number" class="form-control" id="basic-default-price" disabled th:value="${booking.getTotalPrice()}" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="basic-default-company">Время брона</label>
+                            <input type="text" class="form-control" id="basic-start-date" disabled th:value="${booking.getBookingDate()}" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="basic-default-company">Статус брона</label>
+                            <select name="status" id="status" class="form-control">
+                                <option th:each="status : ${bookingStatuses}"
+                                        th:value="${status}"
+                                        th:text="${status}"
+                                        th:selected="${booking.getStatus() == status}">
+                                </option>
+                            </select>
+
+                            <input type="hidden" id="booking_id" name="booking_id" th:value="${booking.id}">
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="updateBooking()">Обновить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+        function updateBooking() {
+            var id = document.getElementById("booking_id").value;
+            var status = document.getElementById("status").value;
+
+            var data = {
+                booking_id: id,
+                status: status
+            };
+
+            fetch('/admin/bookings/update?booking_id=' + id + '&status=' + status, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = '/admin/bookings?success';
+                    } else {
+                        window.location.href = '/admin/bookings?error';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    window.location.href = '/error?error';
+                });
+        }
+
+    </script>
+</div>

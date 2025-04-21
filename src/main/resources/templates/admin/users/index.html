@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th = "http://www.thymeleaf.org"
+      xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/admin.html"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div layout:fragment="content">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="card">
+            <h5 class="card-header">Список всех пользователей</h5>
+            <div class="table-responsive text-nowrap">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Имя</th>
+                        <th>Фамилия</th>
+                        <th>Email</th>
+                        <th>Имя пользователя</th>
+                        <th>Номер телефона</th>
+                        <th>Статус</th>
+                        <th>Функции</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                    <tr th:each="user, index : ${users}">
+                        <td th:text="${index.index + 1}"></td>
+                        <td th:text="${user.getFirstName()}"></td>
+                        <td th:text="${user.getLastName()}"></td>
+                        <td th:text="${user.getEmail()}"></td>
+                        <td th:text="${user.getUsername()}"></td>
+                        <td th:text="${user.getPhone()}"></td>
+                        <td>
+                            <span th:if="${user.isBanned()}" class="badge bg-label-danger me-1">Забанен</span>
+                            <span th:if="${not user.isBanned()}" class="badge bg-label-success me-1">Активен</span>
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <form th:if="${user.isBanned()}" th:action="@{'/admin/users/unban/' + ${user.id}}" method="post">
+                                        <button type="submit" class="dropdown-item">
+                                            <i class='bx bx-lock-open-alt' ></i> Разбанить
+                                        </button>
+                                    </form>
+                                    <form th:unless="${user.isBanned()}" th:action="@{'/admin/users/ban/' + ${user.id}}" method="post">
+                                        <button type="submit" class="dropdown-item">
+                                            <i class='bx bx-lock-alt' ></i> Забанить
+                                        </button>
+                                    </form>
+                                    <form th:action="@{'/admin/users/delete/' + ${user.id}}" method="post">
+                                        <button type="submit" class="dropdown-item">
+                                            <i class="bx bx-trash me-1"></i> Удалить
+                                        </button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="content-backdrop fade"></div>
+</div>

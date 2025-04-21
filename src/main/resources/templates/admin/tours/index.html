@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th = "http://www.thymeleaf.org"
+      xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/admin.html"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div layout:fragment="content">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="card">
+            <h5 class="card-header">Список всех туров</h5>
+            <div class="card-body">
+                <a th:href="@{'/admin/tours/create'}" class="btn btn-primary">Добавить тур</a>
+            </div>
+            <div class="table-responsive text-nowrap">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Название</th>
+                        <th>Цена</th>
+                        <th>Дата начала</th>
+                        <th>Дата окончания</th>
+                        <th>Место назначения</th>
+                        <th>Доступные места</th>
+                        <th>Функции</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                    <tr th:each="tour, index : ${tours}">
+                        <td th:text="${index.index + 1}"></td>
+                        <td th:text="${tour.getTitle()}"></td>
+                        <td th:text="${tour.getPrice()}"></td>
+                        <td th:text="${tour.getStartDate()}"></td>
+                        <td th:text="${tour.getEndDate()}"></td>
+                        <td th:text="${tour.getDestination()}"></td>
+                        <td th:text="${tour.getAvailableSeats()}"></td>
+                        <td>
+                            <div class="dropdown">
+                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" th:href="@{'/admin/tours/edit/' + ${tour.id}}"
+                                    ><i class="bx bx-edit-alt me-1"></i> Редактировать</a
+                                    >
+                                    <form th:action="@{'/admin/tours/delete/' + ${tour.id}}" method="post">
+                                        <button type="submit" class="dropdown-item" role="button">
+                                            <i class="bx bx-trash me-1"></i> Удалить
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="content-backdrop fade"></div>
+</div>

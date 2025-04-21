@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en"
+      xmlns:th = "http://www.thymeleaf.org"
+      xmlns:layout = "http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layouts/admin.html"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div layout:fragment="content">
+    <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="row">
+        <div class="col-xl">
+            <div class="card mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">Создать тур</h5>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{'/tours/store'}" method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label class="form-label" for="basic-default-fullname">Название</label>
+                            <input type="text" name="title" class="form-control" id="basic-default-fullname" placeholder="Название тура" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="basic-default-company">Короткое описание</label>
+                            <input type="text" name="short_description" class="form-control" id="basic-default-company" placeholder="Короткое описание" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="basic-default-company">Цена</label>
+                            <input type="number" name="price" class="form-control" id="basic-default-price" placeholder="Цена тура" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="basic-default-company">Дата начала</label>
+                            <input type="date" name="startDate" class="form-control" id="basic-start-date" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="basic-default-company">Дата окончания</label>
+                            <input type="date" name="endDate" class="form-control" id="basic-end-date" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="basic-default-company">Место назначения</label>
+                            <select name="destination" id="" class="form-control">
+                                <option th:each="destination : ${destinations}" th:value="${destination}" th:text="${destination}"></option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="basic-seats">Доступные места</label>
+                            <input type="number" name="availableSeats" class="form-control" id="basic-seats" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="basic-default-description">Описание</label>
+                            <textarea
+                                    id="basic-default-description"
+                                    class="form-control"
+                                    placeholder="Описание тура"
+                                    name="description"
+                            ></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="basic-image">Изображение</label>
+                            <input type="file" name="imageUrl" class="form-control" id="basic-image" />
+                        </div>
+                        <button type="submit" class="btn btn-primary">Создать</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
